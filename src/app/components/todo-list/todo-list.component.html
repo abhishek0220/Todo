@@ -1,0 +1,29 @@
+
+<div class="container" style="padding-top: 25px;">
+    <!--
+    <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style">
+        <mat-button-toggle value="bold">Bold</mat-button-toggle>
+        <mat-button-toggle value="italic">Italic</mat-button-toggle>
+        <mat-button-toggle value="underline">Underline</mat-button-toggle>
+    </mat-button-toggle-group>-->
+    <br><br>
+    <mat-accordion>
+        <mat-expansion-panel *ngFor = "let eachtodo of alltodo">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{eachtodo.title}}
+            </mat-panel-title>
+            <mat-panel-description>
+                {{eachtodo.description.substring(0,25) + '...'}}
+            </mat-panel-description>
+            <a href = "#">
+            <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">edit</mat-icon>
+          </a>
+        </mat-expansion-panel-header>
+          <p>{{eachtodo.description}}</p>
+          Last Edited - {{eachtodo.lastedited}}
+          <mat-icon class="example-icon right" aria-hidden="false" aria-label="Example delete icon">delete</mat-icon>
+        </mat-expansion-panel>
+    </mat-accordion>
+      
+</div>

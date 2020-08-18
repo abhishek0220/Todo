@@ -3,7 +3,10 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    "types": [
+      "jquery", // Add
+      "materialize-css" // Add
+    ]
   },
   "files": [
     "src/main.ts",

@@ -12,7 +12,8 @@ module.exports = function(ref){
                 title : title,
                 description: description,
                 iscompleted : iscompleted,
-                isfavourite : isfavourite 
+                isfavourite : isfavourite,
+                lastedited :  new Date().toLocaleString()
             }, function(error) {
                 if (error) {
                     res.send("Data could not be saved." + error);
@@ -50,7 +51,8 @@ module.exports = function(ref){
             }
         }
         if((new_todo.iscompleted == null || (typeof(new_todo.iscompleted) === "boolean")) && (new_todo.isfavourite == null || (typeof(new_todo.isfavourite) === "boolean") ) ){
-            var id = req.params.id
+            var id = req.params.id;
+            new_todo.lastedited = new Date().toLocaleString();
             ref.child(id).update(new_todo, function(error) {
                 if (error) {
                     res.send("Data could not be saved." + error);

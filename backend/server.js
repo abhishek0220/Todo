@@ -1,5 +1,6 @@
 let express = require('express'),
     cors = require('cors'),
+    path = require('path'),
     bodyParser = require('body-parser');
 var firebase = require('firebase-admin');
 var key = require('./key.json');
@@ -18,7 +19,8 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(cors()); 
-
+app.use(express.static(path.join(__dirname, 'docs')));
+app.use('/', express.static(path.join(__dirname, 'docs')));
 app.use('/api', apis)
 
 const port = process.env.PORT || 4000;

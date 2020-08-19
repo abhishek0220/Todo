@@ -19,8 +19,6 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(cors()); 
-app.use(express.static(path.join(__dirname, 'docs')));
-app.use('/', express.static(path.join(__dirname, 'docs')));
 app.use('/api', apis)
 
 const port = process.env.PORT || 4000;

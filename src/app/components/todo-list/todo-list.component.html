@@ -1,5 +1,10 @@
 
-<div class="container" style="padding-top: 25px;">
+<div class="container" style="padding: 25px 0px;">
+    <div style="z-index:5; position : fixed;display : flex; align-self : flex-end;bottom : 10%; margin-bottom : 68px; right: 10%;">
+      <button mat-fab routerLink="/add" color="accent" aria-label="Example icon button with a delete icon">
+        <mat-icon>add</mat-icon>
+      </button>  
+    </div>
     <!--
     <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style">
         <mat-button-toggle value="bold">Bold</mat-button-toggle>
@@ -7,22 +12,31 @@
         <mat-button-toggle value="underline">Underline</mat-button-toggle>
     </mat-button-toggle-group>-->
     <br><br>
+    <p *ngIf="alltodo.length <= 0" class="no-data text-center">There is no Todo added yet!</p>
     <mat-accordion>
-        <mat-expansion-panel *ngFor = "let eachtodo of alltodo">
-          <mat-expansion-panel-header>
+        <mat-expansion-panel *ngFor = "let eachtodo of alltodo; let i = index" style="margin-top: 5px;" hideToggle>
+          <mat-expansion-panel-header [ngClass]="eachtodo.iscompleted?'green accent-2':'orange lighten-5'">
             <mat-panel-title>
               {{eachtodo.title}}
             </mat-panel-title>
             <mat-panel-description>
                 {{eachtodo.description.substring(0,25) + '...'}}
             </mat-panel-description>
-            <a href = "#">
-            <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">edit</mat-icon>
-          </a>
-        </mat-expansion-panel-header>
+            <span style="margin-right:10px;" *ngIf="eachtodo.isfavourite"> 
+              <mat-icon aria-hidden="false" color="warn">star_outline</mat-icon>
+            </span>
+            <span class="hover-cursor" (click)="deleteTodo(eachtodo.id, i)" style="margin-right:10px;">
+              <mat-icon class="right" aria-hidden="false">delete</mat-icon>
+            </span>
+          </mat-expansion-panel-header>
           <p>{{eachtodo.description}}</p>
           Last Edited - {{eachtodo.lastedited}}
-          <mat-icon class="example-icon right" aria-hidden="false" aria-label="Example delete icon">delete</mat-icon>
+          <mat-action-row>
+            <span class="hover-cursor" style="margin-right:10px;" [routerLink]="['/edit/', eachtodo.id]"> 
+              <mat-icon class="right" aria-hidden="false">edit</mat-icon>
+            </span>
+          </mat-action-row>
+          
         </mat-expansion-panel>
     </mat-accordion>
       

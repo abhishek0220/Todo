@@ -7,7 +7,6 @@ import {ApiService} from './../../service/api.service';
 })
 export class TodoListComponent implements OnInit {
   alltodo : any = [];
-  ads : string = "ef";
   constructor(private apiservice:ApiService) {
   }
 
@@ -23,8 +22,24 @@ export class TodoListComponent implements OnInit {
         dic["id"] = key;
         tmp.push(dic)
       }
+      tmp.sort((a,b) => {
+        if(a.iscompleted == b.iscompleted){
+          if(a.lastepoch > b.lastepoch) return 0;
+          else return 0;
+        }
+        return a.iscompleted - b.iscompleted;
+      })
       this.alltodo = tmp;
     })  
+  }
+
+  deleteTodo(id:string, index){
+    if(window.confirm('Are you sure?')){
+      this.apiservice.removeTodo(id).subscribe((data) => {
+        console.log("deleted")
+        this.alltodo.splice(index, 1);
+      });
+    }
   }
 
 

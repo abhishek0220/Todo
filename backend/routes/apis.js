@@ -13,17 +13,18 @@ module.exports = function(ref){
                 description: description,
                 iscompleted : iscompleted,
                 isfavourite : isfavourite,
-                lastedited :  new Date().toLocaleString()
+                lastedited :  new Date().toLocaleString(),
+                lastepoch : new Date().getTime()
             }, function(error) {
                 if (error) {
-                    res.send("Data could not be saved." + error);
+                    res.send({msg:"Data could not be saved." + error});
                 } else {
-                    res.send("Data saved successfully.");
+                    res.send({msg:"Data saved successfully."});
                 }
             });
         }
         else{
-            res.send("Pls send title and other details in correct form");
+            res.send({msg:"Pls send title and other details in correct form"});
         }
     });
     apis.route('/todo').get((req, res) => {
@@ -53,11 +54,12 @@ module.exports = function(ref){
         if((new_todo.iscompleted == null || (typeof(new_todo.iscompleted) === "boolean")) && (new_todo.isfavourite == null || (typeof(new_todo.isfavourite) === "boolean") ) ){
             var id = req.params.id;
             new_todo.lastedited = new Date().toLocaleString();
+            new_todo.lastepoch = new Date().getTime();
             ref.child(id).update(new_todo, function(error) {
                 if (error) {
-                    res.send("Data could not be saved." + error);
+                    res.send({msg:"Data could not be saved." + error});
                 } else {
-                    res.send("Data saved successfully.");
+                    res.send({msg: "Data saved successfully."});
                 }
             });
         }

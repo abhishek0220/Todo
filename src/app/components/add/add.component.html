@@ -1,0 +1,23 @@
+<div class="container row" style="margin-top: 20px; height: 100%;">
+        <div class="col m6 s10 offset-m3 offset-s1 z-depth-4" style="padding: 20px 10px;">
+            <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+                <mat-form-field appearance="fill" class="col s12">
+                    <mat-label>Title</mat-label>
+                    <input matInput formControlName="title">
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="col s12">
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description" style="height: 200px;"></textarea>
+                </mat-form-field>
+                <div class="col s12">
+                    <mat-slide-toggle formControlName="isfavourite">Favourite</mat-slide-toggle>
+                    <mat-slide-toggle class="right" formControlName="iscompleted">Completed</mat-slide-toggle>
+                </div>
+                <div class="col s12 center" style="margin-top: 20px;">
+                    <button mat-raised-button color="accent">Create Todo</button>
+                </div>
+            </form>
+            
+        </div>
+    
+</div>
